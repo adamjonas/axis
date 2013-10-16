@@ -2,12 +2,14 @@ var autoprefixer = require('autoprefixer-stylus'),
     nib = require('nib'),
     path = require('path');
 
-module.exports = function(opts) {
+exports = module.exports = function(opts) {
   var implicit = (opts && opts.implicit == false) ? false : true;
 
   return function(style){
+    // include nib
+    nib()(style);
+
     // include axis
-    style.include(nib.path);
     style.include(__dirname);
 
     // implicit import handling
@@ -21,3 +23,5 @@ module.exports = function(opts) {
   }
 
 }
+
+exports.path = __dirname;
